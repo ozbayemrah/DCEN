@@ -1,0 +1,24 @@
+import PanelHeaderBadge from '../components/ui/PanelHeaderBadge'
+import PanelShell from '../components/ui/PanelShell'
+import PlainPanel from '../components/ui/PlainPanel'
+
+function Panel({ title, className = '' }: { title: string; className?: string }) {
+  return (
+    <PanelShell className={`flex flex-col items-start gap-2 bg-white/40 ${className}`}>
+      <PanelHeaderBadge>{title}</PanelHeaderBadge>
+      <p className="text-sm text-[#6e808e]">Coming next.</p>
+    </PanelShell>
+  )
+}
+
+export default function Overview() {
+  return (
+    <div className="grid grid-cols-3 gap-4">
+      <Panel title="Source Terminal" className="aspect-square" />
+      <Panel title="RES Map" className="aspect-square" />
+      <Panel title="Heat Map" className="aspect-square" />
+      <PlainPanel title="General Source Terminal" className="col-span-2" />
+      <PlainPanel title="Usage Terminal" />
+    </div>
+  )
+}
