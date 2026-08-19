@@ -13,12 +13,12 @@ function Panel({ title, className = '' }: { title: string; className?: string })
 
 export default function Overview() {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid h-full grid-cols-3 grid-rows-[auto_1fr] gap-4">
       <Panel title="Source Terminal" className="aspect-square" />
       <Panel title="RES Map" className="aspect-square" />
       <Panel title="Heat Map" className="aspect-square" />
-      <PlainPanel title="General Source Terminal" className="col-span-2" />
-      <PlainPanel title="Usage Terminal" />
+      <PlainPanel title="General Source Terminal" className="col-span-2 justify-center" />
+      <PlainPanel title="Usage Terminal" className="justify-center" />
     </div>
   )
 }

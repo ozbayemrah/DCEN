@@ -1,5 +1,6 @@
 import type { OrderItem } from '../../lib/mockActivity'
 import { statusPillClass } from '../../lib/status'
+import ScrollArea from './ScrollArea'
 
 type OrderListProps = {
   title: string
@@ -8,12 +9,12 @@ type OrderListProps = {
 
 export default function OrderList({ title, items }: OrderListProps) {
   return (
-    <div className="flex w-80 flex-col gap-2">
+    <div className="flex w-[22rem] flex-col gap-2">
       <div className="flex items-center justify-between px-1">
         <p className="text-sm font-bold text-[#1c2632]">{title}</p>
         <span className="rounded px-2 py-0.5 text-xs text-[#6e808e]">{items.length} orders</span>
       </div>
-      <div className="scroll-thin flex max-h-80 flex-col gap-1 overflow-y-auto pr-1">
+      <ScrollArea maxHeight="20rem" contentClassName="flex flex-col gap-1">
         {items.map((item) => (
           <button
             key={item.id}
@@ -30,7 +31,7 @@ export default function OrderList({ title, items }: OrderListProps) {
             <p className="text-xs text-[#6e808e]">{item.meta}</p>
           </button>
         ))}
-      </div>
+      </ScrollArea>
     </div>
   )
 }

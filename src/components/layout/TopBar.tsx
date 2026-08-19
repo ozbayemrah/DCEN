@@ -71,7 +71,6 @@ export default function TopBar({ fullName, company, greeting, unreadCount, highP
                 inline
                 align="left"
                 trigger={<span className="cursor-default font-bold underline">{unreadCount} unread messages</span>}
-                panelClassName="w-80"
               >
                 <OrderList title="Messages" items={messageOrders} />
               </HoverCard>
@@ -86,7 +85,6 @@ export default function TopBar({ fullName, company, greeting, unreadCount, highP
                     {highPriorityCount} High Priority Notification
                   </span>
                 }
-                panelClassName="w-80"
               >
                 <OrderList title="Notifications" items={notificationOrders} />
               </HoverCard>

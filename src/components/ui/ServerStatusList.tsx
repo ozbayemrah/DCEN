@@ -1,5 +1,6 @@
 import type { ServerStatusItem } from '../../lib/mockActivity'
 import { statusHex } from '../../lib/status'
+import ScrollArea from './ScrollArea'
 
 type ServerStatusListProps = {
   title: string
@@ -9,14 +10,14 @@ type ServerStatusListProps = {
 
 export default function ServerStatusList({ title, summary, items }: ServerStatusListProps) {
   return (
-    <div className="flex w-80 flex-col gap-2">
+    <div className="flex w-[22rem] flex-col gap-2">
       <div className="flex items-center justify-between px-1">
         <p className="text-sm font-bold text-[#1c2632]">{title}</p>
         <span className="rounded bg-[rgba(0,255,60,0.25)] px-2 py-0.5 text-[10px] font-bold text-[#1c2632]">
           {summary}
         </span>
       </div>
-      <div className="scroll-thin flex max-h-64 flex-col gap-1 overflow-y-auto pr-1">
+      <ScrollArea maxHeight="16rem" contentClassName="flex flex-col gap-1">
         {items.map((item) => (
           <div
             key={item.name}
@@ -32,7 +33,7 @@ export default function ServerStatusList({ title, summary, items }: ServerStatus
             )}
           </div>
         ))}
-      </div>
+      </ScrollArea>
     </div>
   )
 }
