@@ -12,16 +12,16 @@ export default function BottomNav({ fullName }: BottomNavProps) {
   })
 
   return (
-    <footer className="border-t border-white px-8 py-3">
-      <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-[#6e808e]">
-        <div className="flex flex-wrap items-center gap-3">
+    <footer className="border-t border-white px-4 py-3 lg:px-8">
+      <div className="flex flex-col items-start gap-2 text-xs text-[#6e808e] lg:flex-row lg:items-center lg:justify-between lg:gap-3">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
           <span>{dateLabel}</span>
           <span className="opacity-40">·</span>
           <span>{SYSTEM_VERSION}</span>
           <span className="opacity-40">·</span>
           <span>{fullName}</span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3 lg:gap-4">
           <span className="flex items-center gap-1.5">
             <span className="size-1.5 rounded-full bg-[#00ff3c]" />
             AES-256 encrypted · TLS 1.3

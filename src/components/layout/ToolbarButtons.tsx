@@ -52,7 +52,7 @@ const buttons = toolbarButtons
 
 export default function ToolbarButtons() {
   return (
-    <div className="flex items-center justify-end gap-2">
+    <div className="scroll-hide flex items-center justify-start gap-2 overflow-x-auto lg:justify-end">
       {buttons.map(({ key, label, Icon }) => (
         <button
           key={key}

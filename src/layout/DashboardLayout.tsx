@@ -21,10 +21,10 @@ export default function DashboardLayout() {
         unreadCount={10}
         highPriorityCount={6}
       />
-      <div className="flex flex-1 gap-4 p-4">
+      <div className="flex flex-1 gap-3 p-3 lg:gap-4 lg:p-4">
         <Sidebar />
-        <div className="flex min-w-0 flex-1 flex-col gap-4">
-          <div className="flex items-center justify-between gap-4">
+        <div className="flex min-w-0 flex-1 flex-col gap-3 lg:gap-4">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
             <ViewTabs />
             <ToolbarButtons />
           </div>

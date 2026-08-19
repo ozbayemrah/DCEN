@@ -11,7 +11,7 @@ const comingSoonTabs = ['Maintenance', 'Deployments', 'Terminal Issues']
 
 export default function ViewTabs() {
   return (
-    <div className="flex items-center gap-2 rounded-lg">
+    <div className="scroll-hide flex items-center gap-2 overflow-x-auto rounded-lg">
       {tabs.map(({ label, to }) => (
         <NavLink
           key={to}

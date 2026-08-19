@@ -23,7 +23,7 @@ export default function Sidebar() {
 
   return (
     <nav
-      className="relative flex w-[219px] shrink-0 flex-col items-start gap-3 overflow-clip rounded-lg border border-white py-4 pl-4 pr-6"
+      className="relative hidden w-[219px] shrink-0 flex-col items-start gap-3 overflow-clip rounded-lg border border-white py-4 pl-4 pr-6 lg:flex"
       style={{
         backgroundImage:
           'linear-gradient(192.92deg, rgb(211, 221, 229) 0%, rgb(239, 242, 249) 45.232%)',
