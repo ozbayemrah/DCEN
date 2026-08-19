@@ -43,7 +43,7 @@ export function ZoomLocateStack({ className = '' }: { className?: string }) {
 
 export function FullscreenButton() {
   return (
-    <ControlButton className="absolute right-2 top-2">
+    <ControlButton className="absolute right-2 top-2 z-[1000]">
       <IconTile src={iconFullscreen} className="size-6" />
     </ControlButton>
   )
