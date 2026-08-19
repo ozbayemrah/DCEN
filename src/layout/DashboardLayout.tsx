@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import Sidebar from '../components/layout/Sidebar'
 import TopBar from '../components/layout/TopBar'
-import ToolbarButtons from '../components/layout/ToolbarButtons'
 import ViewTabs from '../components/layout/ViewTabs'
 import BottomNav from '../components/layout/BottomNav'
 
@@ -14,20 +13,21 @@ export default function DashboardLayout() {
 
   return (
     <div className="flex min-h-screen flex-col bg-[#eff2f9]">
-      <TopBar
-        fullName={fullName}
-        company={company}
-        greeting={greeting}
-        unreadCount={10}
-        highPriorityCount={6}
-      />
+      <div className="sticky top-0 z-30 bg-[#eff2f9]">
+        <TopBar
+          fullName={fullName}
+          company={company}
+          greeting={greeting}
+          unreadCount={10}
+          highPriorityCount={6}
+        />
+        <div className="border-b border-white px-4 py-3 lg:px-8">
+          <ViewTabs />
+        </div>
+      </div>
       <div className="flex flex-1 gap-3 p-3 lg:gap-4 lg:p-4">
         <Sidebar />
         <div className="flex min-w-0 flex-1 flex-col gap-3 lg:gap-4">
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
-            <ViewTabs />
-            <ToolbarButtons />
-          </div>
           <div className="flex flex-1 flex-col">
             <Outlet />
           </div>

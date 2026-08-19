@@ -59,6 +59,17 @@ The `Main Entry` node (`176:149099`, the Standard View screen) contains 5 sub-fr
 - **`HexGrid`** (`src/components/heatmap/HexGrid.tsx`) + **`GaugeChart`** (`src/components/charts/GaugeChart.tsx`): hand-built SVG visualizations (hex heatmap, circular gauge) used in place of Figma-exported map images once the Figma quota ran out.
 - Sidebar nav items (Source, Storage & Backup, Grid, Consumption) expand into sub-category dropdowns (accordion, one open at a time); only Source and Storage have real sub-items so far.
 
+## Responsive / mobile
+
+Mobile-first-ish: base (unprefixed) Tailwind classes target phones, `lg:` (1024px+) restores the desktop layout described above. The breakpoint choice is deliberate — `Sidebar`, `ViewTabs`, and the 3-column Standard View grid all need real width, so tablet-width devices still get the compact mobile treatment rather than a half-broken in-between state.
+
+- **`TopBar`**: below `lg:`, the stat groups (`StatGroup`/`statGroups`) move out of the header row into their own horizontally-scrollable strip underneath (`overflow-x-auto` + `.scroll-hide` for a clean scrollbar-free look — swipe/drag to see the rest). The greeting subtext, the account-name text, the divider bars, and the date/time hover panel are hidden on mobile (info already covered by `BottomNav`); the icon cluster wraps instead of overflowing.
+- **`Sidebar`**: `hidden lg:flex` — not present at all on mobile, per the request to drop it there.
+- **`ViewTabs`** and **`ToolbarButtons`**: each independently horizontally-scrollable (`overflow-x-auto` + `.scroll-hide`) since neither the 7 view tabs nor the 3 toolbar buttons fit a phone width. `DashboardLayout` stacks them (tabs row, then toolbar row) below `lg:`, sits them side-by-side at `lg:`.
+- **Standard View grid** (`Overview.tsx`): `grid-cols-1` below `lg:` — all 5 panels (Source Terminal, Heat Map, RES Map, General Source Terminal, Usage Terminal) stack full-width in that order, each panel unchanged internally (`EnergyMapPanel`'s `aspect-square` naturally fits the viewport width). `lg:grid-cols-3 lg:grid-rows-[auto_1fr]` restores the desktop grid.
+- **`BottomNav`**: stacks its two groups (date/version/name, then encryption/Help) vertically below `lg:` instead of `justify-between` on one row.
+- Not yet touched: `GridMap`/`DeploymentTracker`/`LoadTest` (the other routed pages) still assume desktop-width layouts internally — this pass covered the shared app shell + Standard View only.
+
 ## Known gaps / next steps
 
 - Standard View's General Source Terminal and Usage Terminal panels (bottom row) still show "Coming next." placeholders.
@@ -67,3 +78,5 @@ The `Main Entry` node (`176:149099`, the Standard View screen) contains 5 sub-fr
 - Heat Map (route page) and Loading Capacity results/summary panels are placeholders pending design.
 - No backend/API — all values are mocked or randomly simulated client-side.
 - No auth — Login always succeeds and redirects to `/`.
+- `GridMap`, `DeploymentTracker`, and `LoadTest` haven't had a responsive pass yet — only the shared shell (TopBar/Sidebar/ViewTabs/ToolbarButtons/BottomNav) and Standard View are mobile-ready so far.
+- Login page (separate from `DashboardLayout`) hasn't been checked for mobile either.
