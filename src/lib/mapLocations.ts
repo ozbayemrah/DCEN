@@ -16,7 +16,7 @@ export const LEIBNITZ_AREA: MapLocation = {
 // Leibnitz town center — Heat Map
 export const LEIBNITZ_CENTER: MapLocation = {
   center: [46.7805, 15.5407],
-  zoom: 15,
+  zoom: 14,
   bbox: { south: 46.7605, west: 15.5107, north: 46.8005, east: 15.5707 },
 }
 
