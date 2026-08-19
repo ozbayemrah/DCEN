@@ -4,15 +4,19 @@ import {
   energySourceColor,
   energySourceLabel,
   fetchEnergyInfrastructure,
+  type Bbox,
   type EnergyFeature,
 } from '../../lib/energyInfrastructure'
 
-const CENTER: [number, number] = [46.7808, 15.535]
-const BBOX = { south: 46.65, west: 15.35, north: 46.91, east: 15.72 }
-
 type LoadState = 'loading' | 'success' | 'error'
 
-export default function SourceTerminalMap() {
+type EnergyMapProps = {
+  center: [number, number]
+  zoom: number
+  bbox: Bbox
+}
+
+export default function EnergyMap({ center, zoom, bbox }: EnergyMapProps) {
   const [features, setFeatures] = useState<EnergyFeature[]>([])
   const [loadState, setLoadState] = useState<LoadState>('loading')
   const [retryToken, setRetryToken] = useState(0)
@@ -20,7 +24,7 @@ export default function SourceTerminalMap() {
   useEffect(() => {
     const controller = new AbortController()
     setLoadState('loading')
-    fetchEnergyInfrastructure(BBOX, controller.signal)
+    fetchEnergyInfrastructure(bbox, controller.signal)
       .then((result) => {
         setFeatures(result)
         setLoadState('success')
@@ -31,17 +35,13 @@ export default function SourceTerminalMap() {
         setLoadState('error')
       })
     return () => controller.abort()
-  }, [retryToken])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bbox.south, bbox.west, bbox.north, bbox.east, retryToken])
 
   const retry = useCallback(() => setRetryToken((token) => token + 1), [])
 
   return (
-    <MapContainer
-      center={CENTER}
-      zoom={12}
-      zoomControl={false}
-      className="absolute inset-0 isolate size-full"
-    >
+    <MapContainer center={center} zoom={zoom} zoomControl={false} className="absolute inset-0 isolate size-full">
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"

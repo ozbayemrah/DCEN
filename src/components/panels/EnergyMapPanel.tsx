@@ -2,7 +2,8 @@ import PanelShell from '../ui/PanelShell'
 import PanelHeaderBadge from '../ui/PanelHeaderBadge'
 import { ZoomLocateStack, FullscreenButton, CollapseButton } from './MapControls'
 import UsageBarsWidget, { type BarColumn } from './UsageBarsWidget'
-import SourceTerminalMap from './SourceTerminalMap'
+import EnergyMap from './EnergyMap'
+import type { Bbox } from '../../lib/energyInfrastructure'
 
 const USAGE_COLUMNS: BarColumn[] = [
   {
@@ -33,10 +34,17 @@ const USAGE_COLUMNS: BarColumn[] = [
   },
 ]
 
-export default function SourceTerminalPanel() {
+type EnergyMapPanelProps = {
+  title: string
+  center: [number, number]
+  zoom: number
+  bbox: Bbox
+}
+
+export default function EnergyMapPanel({ title, center, zoom, bbox }: EnergyMapPanelProps) {
   return (
     <PanelShell className="relative isolate aspect-square overflow-hidden p-0">
-      <SourceTerminalMap />
+      <EnergyMap center={center} zoom={zoom} bbox={bbox} />
 
       <FullscreenButton />
       <div className="absolute bottom-2 right-2 z-[1000] flex items-end gap-4">
@@ -48,7 +56,7 @@ export default function SourceTerminalPanel() {
       </div>
 
       <div className="absolute left-2 top-2 z-[1000]">
-        <PanelHeaderBadge>Source Terminal</PanelHeaderBadge>
+        <PanelHeaderBadge>{title}</PanelHeaderBadge>
       </div>
     </PanelShell>
   )
