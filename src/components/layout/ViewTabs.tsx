@@ -18,10 +18,10 @@ export default function ViewTabs() {
           to={to}
           end={to === '/'}
           className={({ isActive }) =>
-            `relative flex h-12 min-w-[120px] shrink-0 items-center overflow-clip rounded-lg border px-4 text-base font-bold ${
+            `relative flex h-12 min-w-[120px] shrink-0 items-center overflow-clip rounded-lg border px-4 text-base font-bold transition-colors duration-150 ${
               isActive
                 ? 'border-2 border-[#6e808e] bg-[#e4ebf1] text-[#eff2f9]'
-                : 'border-white text-[#6e808e]'
+                : 'border-white text-[#6e808e] hover:border-[#6e808e] hover:bg-[#e4ebf1]/60'
             }`
           }
           style={({ isActive }) =>

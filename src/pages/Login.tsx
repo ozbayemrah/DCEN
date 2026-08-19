@@ -56,26 +56,32 @@ export default function Login() {
             className="h-8 rounded-lg border border-[#6e808e] bg-[#e4ebf1] px-2 text-xs text-[#1c2632] placeholder:text-[#6e808e]"
           />
 
-          <button type="button" className="self-end text-xs text-[#1c2632]">
+          <button
+            type="button"
+            className="self-end text-xs text-[#1c2632] underline-offset-2 transition-colors duration-150 hover:text-[#6e808e] hover:underline"
+          >
             Forgot your password?
           </button>
 
           <div className="mt-3 flex flex-col gap-3">
             <button
               type="submit"
-              className="h-12 rounded-lg border border-[#6e808e] bg-[#1c2632] text-2xl font-bold text-[#eff2f9]"
+              className="h-12 rounded-lg border border-[#6e808e] bg-[#1c2632] text-2xl font-bold text-[#eff2f9] transition-colors duration-150 hover:bg-[#2a3646]"
             >
               Login
             </button>
             <button
               type="button"
-              className="h-10 rounded-lg border border-[#6e808e] bg-[#e4ebf1] text-2xl text-[#1c2632]"
+              className="h-10 rounded-lg border border-[#6e808e] bg-[#e4ebf1] text-2xl text-[#1c2632] transition-colors duration-150 hover:bg-white"
             >
               Login with SSO
             </button>
           </div>
 
-          <button type="button" className="mt-4 flex items-center justify-center gap-1 text-xs text-[#1c2632]">
+          <button
+            type="button"
+            className="mt-4 flex items-center justify-center gap-1 text-xs text-[#1c2632] transition-colors duration-150 hover:text-[#6e808e]"
+          >
             Contact with IT support
             <span className="relative size-4">
               <span className="absolute inset-[6.25%_26.14%_6.25%_12.5%]">

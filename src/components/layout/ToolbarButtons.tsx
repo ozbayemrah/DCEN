@@ -55,7 +55,7 @@ export default function ToolbarButtons() {
         <button
           key={key}
           type="button"
-          className="flex w-[184px] shrink-0 items-center gap-2 rounded-lg border border-white p-2"
+          className="flex w-[184px] shrink-0 items-center gap-2 rounded-lg border border-white p-2 transition-colors duration-150 hover:border-[#6e808e] hover:bg-white/40"
         >
           <Icon />
           <span className="whitespace-nowrap text-base font-bold text-[#6e808e]">{label}</span>

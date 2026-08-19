@@ -38,7 +38,7 @@ export default function Sidebar() {
             <button
               type="button"
               onClick={() => hasItems && setOpenKey(isOpen ? null : key)}
-              className="flex w-full shrink-0 items-center gap-2 text-left text-[#6e808e]"
+              className="flex w-full shrink-0 items-center gap-2 rounded-lg px-1 py-1 -mx-1 text-left text-[#6e808e] transition-colors duration-150 hover:bg-[#1c2632]/5 hover:text-[#1c2632]"
             >
               <Icon />
               <span className="flex-1 whitespace-nowrap text-base font-bold">{label}</span>

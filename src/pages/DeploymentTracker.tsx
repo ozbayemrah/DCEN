@@ -62,7 +62,7 @@ export default function DeploymentTracker() {
                   key={key}
                   type="button"
                   onClick={() => setSelected(sector)}
-                  className={`flex items-center justify-between rounded-lg border px-3 py-2 text-left ${
+                  className={`flex items-center justify-between rounded-lg border px-3 py-2 text-left transition-colors duration-150 hover:border-[#6e808e] hover:bg-white/50 ${
                     isSelected ? 'border-[#1c2632]' : 'border-white'
                   }`}
                 >
@@ -92,10 +92,16 @@ export default function DeploymentTracker() {
                   : 'Load within normal operating range. No action required.'}
             </p>
             <div className="flex flex-col gap-2">
-              <button type="button" className="h-10 rounded-lg bg-[#eff2f9] text-sm font-bold text-[#1c2632]">
+              <button
+                type="button"
+                className="h-10 rounded-lg bg-[#eff2f9] text-sm font-bold text-[#1c2632] transition-colors duration-150 hover:bg-white"
+              >
                 Confirm Deployment
               </button>
-              <button type="button" className="h-9 rounded-lg border border-[#eff2f9]/40 text-sm text-[#eff2f9]">
+              <button
+                type="button"
+                className="h-9 rounded-lg border border-[#eff2f9]/40 text-sm text-[#eff2f9] transition-colors duration-150 hover:border-[#eff2f9] hover:bg-[#eff2f9]/10"
+              >
                 Review
               </button>
             </div>
