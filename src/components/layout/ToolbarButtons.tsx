@@ -3,7 +3,7 @@ import ellipse294 from '../../assets/icons/toolbar/ellipse-294.svg'
 import union1 from '../../assets/icons/toolbar/union-1.svg'
 import iconStroke from '../../assets/icons/toolbar/icon-stroke.svg'
 
-function ControlIcon() {
+export function ControlIcon() {
   return (
     <div className="relative size-8 shrink-0 overflow-clip">
       <div className="absolute inset-[6.25%_9.38%]">
@@ -13,7 +13,7 @@ function ControlIcon() {
   )
 }
 
-function ForecastsIcon() {
+export function ForecastsIcon() {
   return (
     <div className="relative size-8 shrink-0">
       <div className="absolute inset-[21.97%_6.25%_15.51%_6.25%]">
@@ -32,7 +32,7 @@ function ForecastsIcon() {
   )
 }
 
-function ToolsIcon() {
+export function ToolsIcon() {
   return (
     <div className="relative size-8 shrink-0 overflow-clip">
       <div className="absolute inset-[6.25%_6.25%_9.38%_9.38%]">
@@ -42,11 +42,13 @@ function ToolsIcon() {
   )
 }
 
-const buttons = [
+export const toolbarButtons = [
   { key: 'control', label: 'Control', Icon: ControlIcon },
   { key: 'forecasts', label: 'Forecasts', Icon: ForecastsIcon },
   { key: 'tools', label: 'Tools', Icon: ToolsIcon },
 ] as const
+
+const buttons = toolbarButtons
 
 export default function ToolbarButtons() {
   return (

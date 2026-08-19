@@ -65,7 +65,7 @@ export function CloudDownloadIcon({ className = 'size-8' }: { className?: string
   )
 }
 
-export function MenuIcon() {
+export function RobotIcon() {
   return (
     <div className="relative size-8 shrink-0 overflow-clip">
       <div className="absolute inset-[4.69%_6.25%_15.63%_6.25%]">
@@ -75,7 +75,7 @@ export function MenuIcon() {
   )
 }
 
-export function HamburgerIcon() {
+export function MenuIcon() {
   return (
     <div className="relative size-8 shrink-0">
       <div className="absolute left-[5px] top-[5px] h-[6px] w-[22px] rounded-sm border-2 border-[#1c2632]" />
@@ -85,7 +85,7 @@ export function HamburgerIcon() {
   )
 }
 
-export function GearIcon() {
+export function AccountSettingsIcon() {
   return (
     <div className="relative size-8 shrink-0">
       <div className="absolute inset-[6.25%_26.14%_6.25%_12.5%]">

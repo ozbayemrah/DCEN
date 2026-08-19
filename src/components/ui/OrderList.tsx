@@ -13,7 +13,7 @@ export default function OrderList({ title, items }: OrderListProps) {
         <p className="text-sm font-bold text-[#1c2632]">{title}</p>
         <span className="rounded px-2 py-0.5 text-xs text-[#6e808e]">{items.length} orders</span>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="scroll-thin flex max-h-80 flex-col gap-1 overflow-y-auto pr-1">
         {items.map((item) => (
           <button
             key={item.id}

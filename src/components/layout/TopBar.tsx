@@ -1,21 +1,33 @@
 import { StatGroup, statGroups } from './StatTicker'
 import {
+  AccountSettingsIcon,
   AvatarPhoto,
   BellIcon,
   ChatIcon,
   CloudDownloadIcon,
   DropdownChevron,
-  GearIcon,
-  HamburgerIcon,
   LogoIcon,
   MenuIcon,
+  RobotIcon,
   RssIcon,
   StructureIcon,
 } from './TopBarIcons'
+import { toolbarButtons } from './ToolbarButtons'
 import HoverCard from '../ui/HoverCard'
 import IconButton from '../ui/IconButton'
 import OrderList from '../ui/OrderList'
-import { messageOrders, notificationOrders, operatorLocation } from '../../lib/mockActivity'
+import ServerStatusList from '../ui/ServerStatusList'
+import MenuActionList from '../ui/MenuActionList'
+import { statusPillClass } from '../../lib/status'
+import {
+  cloudSync,
+  llmServers,
+  menuMoreTools,
+  messageOrders,
+  notificationOrders,
+  operatorLocation,
+  userSettingsItems,
+} from '../../lib/mockActivity'
 
 type TopBarProps = {
   fullName: string
@@ -41,6 +53,7 @@ export default function TopBar({ fullName, company, greeting, unreadCount, highP
     year: 'numeric',
   })
   const timeLabel = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
+  const llmOnlineCount = llmServers.filter((server) => server.status === 'good').length
 
   return (
     <header className="flex items-start justify-between gap-4 border-b border-white px-8 py-3">
@@ -53,12 +66,30 @@ export default function TopBar({ fullName, company, greeting, unreadCount, highP
           <div className="pt-1">
             <p className="text-2xl font-bold text-[#1c2632]">{greeting}, {firstName}</p>
             <p className="text-base text-[#1c2632]">
-              You have <span className="font-bold underline">{unreadCount} unread messages</span>,
+              You have{' '}
+              <HoverCard
+                inline
+                align="left"
+                trigger={<span className="cursor-default font-bold underline">{unreadCount} unread messages</span>}
+                panelClassName="w-80"
+              >
+                <OrderList title="Messages" items={messageOrders} />
+              </HoverCard>
+              ,
               <br />
               and{' '}
-              <span className="font-bold text-[#f02] underline">
-                {highPriorityCount} High Priority Notification
-              </span>
+              <HoverCard
+                inline
+                align="left"
+                trigger={
+                  <span className="cursor-default font-bold text-[#f02] underline">
+                    {highPriorityCount} High Priority Notification
+                  </span>
+                }
+                panelClassName="w-80"
+              >
+                <OrderList title="Notifications" items={notificationOrders} />
+              </HoverCard>
             </p>
           </div>
         </div>
@@ -92,18 +123,85 @@ export default function TopBar({ fullName, company, greeting, unreadCount, highP
               >
                 <OrderList title="Messages" items={messageOrders} />
               </HoverCard>
-              <IconButton className="p-1.5" aria-label="Downloads">
-                <CloudDownloadIcon />
-              </IconButton>
-              <IconButton className="p-1.5" aria-label="Menu">
-                <MenuIcon />
-              </IconButton>
-              <IconButton className="p-1.5" aria-label="Navigation">
-                <HamburgerIcon />
-              </IconButton>
-              <IconButton className="p-1.5" aria-label="Settings">
-                <GearIcon />
-              </IconButton>
+              <HoverCard
+                align="right"
+                panelClassName="w-64"
+                trigger={
+                  <IconButton className="p-1.5" aria-label="Cloud sync status">
+                    <CloudDownloadIcon />
+                  </IconButton>
+                }
+              >
+                <div className="flex flex-col gap-2 p-1 text-[#1c2632]">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-bold">Cloud Sync</p>
+                    <span className={`rounded px-2 py-0.5 text-[10px] ${statusPillClass[cloudSync.status]}`}>
+                      Up to date
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#6e808e]">Last synced {cloudSync.lastSync}</p>
+                  <p className="text-xs text-[#6e808e]">Next sync {cloudSync.nextSync}</p>
+                  <div className="h-px w-full rounded bg-[#1c2632] opacity-20" />
+                  <p className="text-xs text-[#6e808e]">{cloudSync.destination}</p>
+                </div>
+              </HoverCard>
+              <HoverCard
+                align="right"
+                trigger={
+                  <IconButton className="p-1.5" aria-label="LLM systems status">
+                    <RobotIcon />
+                  </IconButton>
+                }
+              >
+                <ServerStatusList
+                  title="LLM Systems"
+                  summary={`${llmOnlineCount}/${llmServers.length} Online`}
+                  items={llmServers}
+                />
+              </HoverCard>
+              <HoverCard
+                align="right"
+                panelClassName="w-64"
+                trigger={
+                  <IconButton className="p-1.5" aria-label="Tools menu">
+                    <MenuIcon />
+                  </IconButton>
+                }
+              >
+                <div className="flex flex-col gap-2">
+                  <p className="px-1 text-sm font-bold text-[#1c2632]">Tools Menu</p>
+                  <div className="flex flex-col gap-1">
+                    {toolbarButtons.map(({ key, label, Icon }) => (
+                      <button
+                        key={key}
+                        type="button"
+                        className="flex items-center gap-2 rounded-lg border border-transparent px-2 py-2 text-left transition-colors duration-150 hover:border-white hover:bg-[#1c2632]/5"
+                      >
+                        <Icon />
+                        <span className="text-sm font-bold text-[#6e808e]">{label}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="h-px w-full rounded bg-[#1c2632] opacity-20" />
+                  <MenuActionList items={menuMoreTools} />
+                </div>
+              </HoverCard>
+              <HoverCard
+                align="right"
+                panelClassName="w-56"
+                trigger={
+                  <IconButton className="p-1.5" aria-label="User settings">
+                    <AccountSettingsIcon />
+                  </IconButton>
+                }
+              >
+                <div className="flex flex-col gap-2">
+                  <p className="px-1 text-sm font-bold text-[#1c2632]">{fullName}</p>
+                  <p className="px-1 text-xs text-[#6e808e]">{company}</p>
+                  <div className="h-px w-full rounded bg-[#1c2632] opacity-20" />
+                  <MenuActionList items={userSettingsItems} />
+                </div>
+              </HoverCard>
             </div>
             <div className="h-12 w-0.5 rounded bg-[#1c2632] opacity-50" />
             <div className="flex h-12 items-center gap-2">
